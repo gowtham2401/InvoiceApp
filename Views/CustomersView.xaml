@@ -1,0 +1,189 @@
+<UserControl
+    x:Class="InvoiceApp.Views.CustomersView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helpers="clr-namespace:InvoiceApp.Helpers"
+    Background="{StaticResource BackgroundBrush}">
+    <UserControl.Resources>
+        <helpers:BoolToVisibilityConverter x:Key="BoolToVis" />
+        <helpers:BoolToVisibilityConverter x:Key="InvBoolToVis" Invert="True" />
+        <helpers:IdToFormTitleConverter x:Key="IdToTitle" />
+        <helpers:ZeroToAutoConverter x:Key="ZeroToAuto" />
+    </UserControl.Resources>
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="340" />
+        </Grid.ColumnDefinitions>
+
+        <!--  Left: Customer List  -->
+        <Border Margin="0,0,12,0" Style="{StaticResource CardPanel}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!--  Header  -->
+                <DockPanel Grid.Row="0" Margin="0,0,0,16">
+                    <TextBlock
+                        DockPanel.Dock="Left"
+                        Style="{StaticResource SectionTitle}"
+                        Text="Customers  " />
+                    <TextBlock
+                        Margin="0,0,0,2"
+                        VerticalAlignment="Bottom"
+                        DockPanel.Dock="Right"
+                        FontSize="12"
+                        Foreground="{StaticResource TextSecondaryBrush}"
+                        Text="{Binding FilteredCustomers.Count, StringFormat='{}{0} records'}" />
+                </DockPanel>
+
+                <!--  Search + New Button  -->
+                <DockPanel Grid.Row="1" Margin="0,0,0,12">
+                    <Button
+                        Margin="10,0,0,0"
+                        Command="{Binding NewCustomerCommand}"
+                        Content="+ New Customer"
+                        DockPanel.Dock="Right"
+                        Style="{StaticResource PrimaryButton}" />
+                    <TextBox
+                        Height="50"
+                        Style="{StaticResource SearchBox}"
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                </DockPanel>
+
+                <!--  DataGrid  -->
+                <DataGrid
+                    Grid.Row="2"
+                    Foreground="Black"
+                    ItemsSource="{Binding FilteredCustomers}"
+                    SelectedItem="{Binding SelectedCustomer}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="55"
+                            Binding="{Binding Id}"
+                            Foreground="#092040"
+                            Header="ID" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Name}"
+                            Foreground="#092040"
+                            Header="Name" />
+                        <DataGridTextColumn
+                            Width="120"
+                            Binding="{Binding Phone}"
+                            Foreground="#092040"
+                            Header="Phone" />
+                        <DataGridTextColumn
+                            Width="180"
+                            Binding="{Binding Email}"
+                            Foreground="#092040"
+                            Header="Email" />
+                        <DataGridTextColumn
+                            Width="130"
+                            Binding="{Binding GstNumber}"
+                            Foreground="#092040"
+                            Header="GST" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <!--  Action Buttons  -->
+                <StackPanel
+                    Grid.Row="3"
+                    Margin="0,12,0,0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Button
+                        Command="{Binding DeleteCustomerCommand}"
+                        Content="Delete"
+                        Style="{StaticResource DangerButton}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!--  Right: Edit Form  -->
+        <Border Grid.Column="1" Style="{StaticResource CardPanel}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0,0,0,20"
+                        FontSize="15"
+                        FontWeight="SemiBold"
+                        Foreground="{StaticResource PrimaryBrush}"
+                        Text="{Binding EditId, Converter={StaticResource IdToTitle}}" />
+
+                    <!--  ID (readonly)  -->
+                    <Label Content="Customer ID (Auto-Generated)" />
+                    <TextBox
+                        Height="45"
+                        Margin="0,0,0,12"
+                        Background="#F5F5F5"
+                        IsReadOnly="True"
+                        Text="{Binding EditId, Mode=OneWay, Converter={StaticResource ZeroToAuto}}" />
+
+                    <!--  Name  -->
+                    <Label Content="Name *" />
+                    <TextBox
+                        Height="45"
+                        Margin="0,0,0,12"
+                        IsEnabled="{Binding IsEditing}"
+                        Text="{Binding EditName, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <!--  Phone  -->
+                    <Label Content="Phone" />
+                    <TextBox
+                        Height="45"
+                        Margin="0,0,0,12"
+                        IsEnabled="{Binding IsEditing}"
+                        Text="{Binding EditPhone, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <!--  Email  -->
+                    <Label Content="Email" />
+                    <TextBox
+                        Height="45"
+                        Margin="0,0,0,12"
+                        IsEnabled="{Binding IsEditing}"
+                        Text="{Binding EditEmail, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <!--  Address  -->
+                    <Label Content="Address" />
+                    <TextBox
+                        Height="90"
+                        Margin="0,0,0,12"
+                        AcceptsReturn="True"
+                        IsEnabled="{Binding IsEditing}"
+                        Text="{Binding EditAddress, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto" />
+
+                    <!--  GST  -->
+                    <Label Content="GST Number (Optional)" />
+                    <TextBox
+                        Height="45"
+                        Margin="0,0,0,20"
+                        IsEnabled="{Binding IsEditing}"
+                        Text="{Binding EditGst, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <!--  Buttons  -->
+                    <Button
+                        Margin="0,0,0,8"
+                        Command="{Binding SaveCustomerCommand}"
+                        Content="Save Customer"
+                        Style="{StaticResource SuccessButton}" />
+                    <Button
+                        Margin="0,0,0,8"
+                        Command="{Binding CancelEditCommand}"
+                        Content="Cancel"
+                        Style="{StaticResource SecondaryButton}" />
+                    <Button
+                        Command="{Binding NewCustomerCommand}"
+                        Content="+ New Customer"
+                        Style="{StaticResource PrimaryButton}" />
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>
