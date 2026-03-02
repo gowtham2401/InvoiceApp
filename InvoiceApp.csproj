@@ -8,6 +8,7 @@
     <LangVersion>7.3</LangVersion>
     <Nullable>disable</Nullable>
     <Platforms>x86;x64;AnyCPU</Platforms>
+    <ApplicationIcon>invoice.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -41,5 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="C:\Users\user25\.nuget\packages\questpdf\2024.3.4\buildTransitive\net4\..\..\runtimes\linux-musl-x64\native\libQuestPdfSkia.so" />
+    <None Remove="Images\invoice.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="invoice.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\invoice.ico" />
   </ItemGroup>
 </Project>

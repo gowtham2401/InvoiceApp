@@ -34,7 +34,7 @@
                     <StackPanel Grid.Column="0" Margin="0,0,10,0">
                         <Label Content="Invoice Number" />
                         <TextBox
-                            Height="34"
+                            Height="45"
                             Background="#F5F5F5"
                             IsReadOnly="True"
                             Text="{Binding EditorInvoiceNumber, Mode=OneWay}" />

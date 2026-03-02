@@ -8,6 +8,7 @@ namespace InvoiceApp.Models
         public string InvoiceNumber { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
         public int CustomerId { get; set; }
+        public string CustomerName { get; set; }
         public ObservableCollection<InvoiceItem> Items { get; set; } = new ObservableCollection<InvoiceItem>();
         public decimal Subtotal { get; set; }
         public decimal TaxPercent { get; set; }

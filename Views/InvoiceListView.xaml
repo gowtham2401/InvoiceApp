@@ -114,7 +114,9 @@
                                         Text="{Binding CustomerId}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
+
                         </DataGridTemplateColumn>
+                        
                         <DataGridTextColumn
                             Width="130"
                             Binding="{Binding GrandTotal, StringFormat='Rs. {0:N2}'}"
