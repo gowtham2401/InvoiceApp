@@ -199,11 +199,20 @@ Exports/
 
 ## 📸 Screenshots
 
-> *Add screenshots here after running the application.*
+***Dashboard***
 
-| Dashboard | Customers | Invoice Editor |
-|---|---|---|
-| *(screenshot)* | *(screenshot)* | *(screenshot)* |
+<img width="1919" height="1001" alt="image" src="https://github.com/user-attachments/assets/0b5868eb-ad57-48b3-8667-053dcf5a4f95" />
+
+ 
+***Customers***
+
+ <img width="1919" height="1001" alt="image" src="https://github.com/user-attachments/assets/67c82697-c3dc-4b79-baab-7cfa079c1660" />
+
+ 
+***Invoice Editor***
+
+ <img width="1919" height="1002" alt="image" src="https://github.com/user-attachments/assets/6d33bbed-c499-436d-915c-9ed99b41c667" />
+
 
 ---
 
