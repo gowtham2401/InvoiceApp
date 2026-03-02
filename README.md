@@ -109,10 +109,10 @@ InvoiceApp/
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/InvoiceGeneratorPro.git
+git clone https://github.com/gowtham2401/InvoiceApp.git
 
 # Open in Visual Studio
-start InvoiceGeneratorPro/InvoiceApp.csproj
+start InvoiceApp.csproj
 ```
 
 1. Open `InvoiceApp.csproj` in Visual Studio
@@ -238,5 +238,3 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 This project is licensed under the [MIT License](LICENSE).
 
 ---
-
-> Built as a portfolio-quality desktop application demonstrating clean MVVM architecture, professional WPF UI design, and offline-first data management.
