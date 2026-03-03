@@ -1,9 +1,10 @@
+using InvoiceApp.Helpers;
+using InvoiceApp.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using InvoiceApp.Models;
-using Newtonsoft.Json;
 
 namespace InvoiceApp.Services
 {
@@ -30,10 +31,18 @@ namespace InvoiceApp.Services
                 if (!File.Exists(filePath))
                     return new T();
 
-                var json = await Task.Run(() => File.ReadAllText(filePath));
+                var encrypted = await Task.Run(() => File.ReadAllText(filePath));
+
+                // Decrypt JSON
+                var json = CryptoHelper.Decrypt(encrypted);
 
                 var result = JsonConvert.DeserializeObject<T>(json);
-                return result != null ? result : new T();
+
+                // null check
+                if (result == null)
+                    return new T();
+
+                return result;
             }
             catch
             {
@@ -45,7 +54,11 @@ namespace InvoiceApp.Services
             try
             {
                 var json = JsonConvert.SerializeObject(data, Formatting.Indented);
-                await Task.Run(() => File.WriteAllText(filePath, json));
+
+                // Encrypt JSON
+                var encrypted = CryptoHelper.Encrypt(json);
+
+                await Task.Run(() => File.WriteAllText(filePath, encrypted));
             }
             catch (Exception ex)
             {

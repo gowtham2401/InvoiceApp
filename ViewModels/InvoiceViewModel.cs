@@ -328,7 +328,7 @@ namespace InvoiceApp.ViewModels
 
         public string GetCustomerName(string customerName)
         {
-            return _customers.FirstOrDefault(c=> c.Name == customerName)?.Name ?? string.Empty;
+            return _customers.FirstOrDefault(c => c.Name == customerName)?.Name ?? string.Empty;
         }
 
         public string this[string columnName] => null;
